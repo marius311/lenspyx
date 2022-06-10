@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "lenspyx"
+version = "1.0.0"
+readme = "README.md"
+description = "Curved-sky python lensed CMB maps simulation package"
+authors = ["Julien Carron <to.jcarron@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+healpy = "*" # would be good specify actual version bounds here and in build-system below
+numpy = "*"
+pyfftw = "*"
+
+[build-system]
+requires = ["setuptools", "numpy"]
+build-backend = "setuptools.build_meta"
