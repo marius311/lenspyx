@@ -1,4 +1,5 @@
 import setuptools
+import sysconfig
 from numpy.distutils.core import setup
 from numpy.distutils.misc_util import Configuration
 
@@ -11,6 +12,7 @@ def configuration(parent_package='', top_path=''):
     config.add_extension('lenspyx.bicubic.bicubic', ['lenspyx/bicubic/bicubic.f90'])
     config.add_extension('lenspyx.shts.fsht', ['lenspyx/shts/shts.f90'],
                 extra_link_args=['-lgomp'],libraries=['gomp'], extra_f90_compile_args=['-fopenmp', '-w'])
+    config.add_include_dirs(sysconfig.get_paths()['include'])
     return config
 
 setup(
