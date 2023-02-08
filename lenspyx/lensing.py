@@ -185,7 +185,7 @@ def _lens_gclm_sym_timed(spin, dlm, glm, nside, nband=8, facres=0, clm=None, dcl
 #    th1s = np.pi/6
 #    th2s = np.pi/3
     nt_perband = int(target_nt / nband)
-    print('nt_perband=%i'%nt_perband)
+    if verbose: print('nt_perband=%i'%nt_perband)
     if np.iscomplexobj(dlm): # inputs are the spin 1 d map
         lmax = hp.Alm.getlmax(dlm.size)
         redtot, imdtot = hp.alm2map_spin([dlm, np.zeros_like(dlm) if dclm is None else dclm], nside, 1, lmax)
@@ -257,9 +257,9 @@ def _strip_lens_gclm_sym_timed(spin, dlm, glm, nside, theta1, theta2, nband=4, f
     #co-latitudes
     th1s = np.arange(nband) * ((theta2 - theta1) / nband) + theta1
     th2s = np.concatenate((th1s[1:],[theta2]))
-    print('th1=%.5f, th2=%.5f'%(th1s[0], th2s[0]))
+    if verbose: print('th1=%.5f, th2=%.5f'%(th1s[0], th2s[0]))
     nt_perband = int(2 * target_nt * (theta2 - theta1) / np.pi / nband)
-    print('nt_perband=%i'%nt_perband)
+    if verbose: print('nt_perband=%i'%nt_perband)
     if np.iscomplexobj(dlm): # inputs are the spin 1 d map
         lmax = hp.Alm.getlmax(dlm.size)
         redtot, imdtot = hp.alm2map_spin([dlm, np.zeros_like(dlm) if dclm is None else dclm], nside, 1, lmax)
@@ -273,7 +273,7 @@ def _strip_lens_gclm_sym_timed(spin, dlm, glm, nside, theta1, theta2, nband=4, f
     for ib, th1, th2 in zip(range(nband), th1s, th2s):
 
 #    for ib in range(1):
-        print('th1=%.5f, th2=%.5f'%(th1, th2))
+        if verbose: print('th1=%.5f, th2=%.5f'%(th1, th2))
 
         if verbose: print("BAND %s in %s :"%(ib, nband))
         
@@ -288,9 +288,9 @@ def _strip_lens_gclm_sym_timed(spin, dlm, glm, nside, theta1, theta2, nband=4, f
         # Adding a 10 pixels buffer for new angles to be safely inside interval.
         # th1,th2 is mapped onto pi - th2,pi -th1 so we need to make sure to cover both buffers
         mathtpn = np.max(thtpn); mithtpn = np.min(thtpn)
-        print('mathtp=%.5f, mithtp=%.5f'%(mathtpn, mithtpn))
+        if verbose: print('mathtp=%.5f, mithtp=%.5f'%(mathtpn, mithtpn))
         mathtps = np.max(thtps); mithtps = np.min(thtps)
-        print('mathtps=%.5f, mithtps=%.5f'%(mathtps, mithtps))
+        if verbose: print('mathtps=%.5f, mithtps=%.5f'%(mathtps, mithtps))
         buffN = 10 * (mathtpn - mithtpn) / (nt_perband - 1) / (1. - 2. * 10. / (nt_perband - 1))
         buffS = 10 * (mathtps - mithtps) / (nt_perband - 1) / (1. - 2. * 10. / (nt_perband - 1))
         if (symmetric_band):
