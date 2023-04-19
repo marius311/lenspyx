@@ -195,7 +195,7 @@ def _lens_gclm_sym_timed(spin, dlm, glm, nside, nband=8, facres=0, clm=None, dcl
         imdtot = dclm
     times.add('defl. spin 1 transform')
     interp_pix = 0
-    ret = np.empty(hp.nside2npix(nside),dtype = float if spin == 0 else complex)
+    ret = np.zeros(hp.nside2npix(nside),dtype = float if spin == 0 else complex)
     for ib, th1, th2 in zip(range(nband), th1s, th2s):
 #   Uncomment for testing
 #    for ib in range(1):
@@ -269,7 +269,7 @@ def _strip_lens_gclm_sym_timed(spin, dlm, glm, nside, theta1, theta2, nband=4, f
         imdtot = dclm
     times.add('defl. spin 1 transform')
     interp_pix = 0
-    ret = np.empty(hp.nside2npix(nside),dtype = float if spin == 0 else complex)
+    ret = np.zeros(hp.nside2npix(nside),dtype = float if spin == 0 else complex)
     for ib, th1, th2 in zip(range(nband), th1s, th2s):
 
 #    for ib in range(1):
